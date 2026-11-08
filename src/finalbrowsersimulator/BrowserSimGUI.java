@@ -171,123 +171,147 @@ package finalbrowsersimulator;
 
     }//GEN-LAST:event_jButton2ActionPerformed
 private void visitPage() {
-    String url = txtURL.getText().trim();
+        String url = txtURL.getText().trim();
 
-    if (url.length() == 0) {
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Please enter a URL.",
-                "Empty URL",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
+        if (url.length() == 0) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Please enter a URL.",
+                    "Empty URL",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (navStack.isFull() || visitedCount >= MAX_PAGES) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Browsing history is full.",
+                    "Stack Full",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        navStack.push(url);
+        visitedPages[visitedCount] = url;
+        visitedCount++;
+
+        txtURL.setText("");
+        updateCurrentPage();
+        updateHistoryDisplay();
     }
 
-    if (navStack.isFull() || visitedCount >= MAX_PAGES) {
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Browsing history is full.",
-                "Stack Full",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
-    }
-     navStack.push(url);
-    visitedPages[visitedCount] = url;
-    visitedCount++;
+    private void goBack() {
+        if (navStack.size() <= 1) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "No previous webpage to go back to.",
+                    "Cannot Go Back",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
 
-    txtURL.setText("");
-    updateCurrentPage();
-    updateHistoryDisplay();
-    
-}
-private void goBack() {
-    if (navStack.size() <= 1) {
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "No previous webpage to go back to.",
-                "Cannot Go Back",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        return;
+        navStack.pop();
+        updateCurrentPage();
+        updateHistoryDisplay();
     }
 
-    navStack.pop();
-
-    updateCurrentPage();
-    updateHistoryDisplay();
-}
-private void updateCurrentPage() {
-    String current = navStack.peek();
-
-    if (current == null) {
-        txtCurrentPage.setText("");
-    } else {
-        txtCurrentPage.setText(current);
-    }
-}
-private void updateHistoryDisplay() {
-    if (visitedCount == 0) {
-        txtHistory.setText("");
-        return;
+    private void updateCurrentPage() {
+        String current = navStack.peek();
+        if (current == null) {
+            txtCurrentPage.setText("");
+        } else {
+            txtCurrentPage.setText(current);
+        }
     }
 
-    String current = navStack.peek();
-    int currentIndex = -1;
+    private void updateHistoryDisplay() {
+        if (visitedCount == 0) {
+            txtHistory.setText("");
+            return;
+        }
 
-    if (current != null) {
-        for (int i = visitedCount - 1; i >= 0; i--) {
-            if (visitedPages[i].equals(current)) {
-                currentIndex = i;
-                break;
+        String current = navStack.peek();
+        int currentIndex = -1;
+        if (current != null) {
+            for (int i = visitedCount - 1; i >= 0; i--) {
+                if (visitedPages[i].equals(current)) {
+                    currentIndex = i;
+                    break;
+                }
             }
         }
-          }
 
-    StringBuilder history = new StringBuilder();
+        StringBuilder history = new StringBuilder();
 
-    for (int i = 0; i < visitedCount; i++) {
-        history.append((i + 1));
-        history.append(". ");
-        history.append(visitedPages[i]);
-
-        if (i == currentIndex) {
-            history.append("  <-- Current");
+        for (int i = 0; i < visitedCount; i++) {
+            history.append((i + 1));
+            history.append(". ");
+            history.append(visitedPages[i]);
+            if (i == currentIndex) {
+                history.append("  <-- Current");
+            }
+            history.append("\n");
         }
 
-        history.append("\n");
+        txtHistory.setText(history.toString());
     }
 
-    txtHistory.setText(history.toString());
-}
-    
-private void searchVisitedPages(String keyword) {
-    if (keyword == null || keyword.trim().length() == 0) {
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Please enter a search keyword.",
-                "Empty Search",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-        return;
+    /**
+     * Call this after you add a search text field to the form.
+     * Example: searchVisitedPages(txtSearch.getText());
+     */
+    private void searchVisitedPages(String keyword) {
+        if (keyword == null || keyword.trim().length() == 0) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Please enter a search keyword.",
+                    "Empty Search",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int index = browserSearch.linearSearch(visitedPages, visitedCount, keyword);
+
+        if (index == -1) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Not Found",
+                    "Search Result",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Found\nWebpage: " + visitedPages[index]
+                            + "\nPosition: " + (index + 1),
+                    "Search Result",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
-    int index = browserSearch.linearSearch(
-            visitedPages, visitedCount, keyword);
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-    if (index == -1) {
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Not Found",
-                "Search Result",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Found\nWebpage: " + visitedPages[index]
-                + "\nPosition: " + (index + 1),
-                "Search Result",
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new BrowserSim21().setVisible(true));
     }
-}
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
