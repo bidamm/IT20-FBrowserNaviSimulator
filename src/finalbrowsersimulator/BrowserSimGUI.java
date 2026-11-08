@@ -17,6 +17,18 @@ package finalbrowsersimulator;
     private BrowserSearch browserSearch;
     private String[] visitedPages;
     private int visitedCount;
+    
+    public BrowserSim21() {
+    initComponents();
+
+    navStack = new BrowserHistoryStack(MAX_PAGES);
+    browserSearch = new BrowserSearch();
+
+    visitedPages = new String[MAX_PAGES];
+    visitedCount = 0;
+}
+
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
