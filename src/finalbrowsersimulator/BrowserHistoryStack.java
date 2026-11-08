@@ -65,5 +65,8 @@ public class BrowserHistoryStack {
 
         return top == -1;
     }
+  public boolean isFull() {
 
+        return top == capacity - 1;
+    }
 }
