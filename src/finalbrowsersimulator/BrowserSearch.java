@@ -14,3 +14,15 @@ public class BrowserSearch {
         BrowserHistoryStack history,
         String keyword
     ) {
+    if (history == null || keyword == null) {
+            return -1;
+        }
+
+        String key = keyword.trim();
+
+        if (key.isEmpty()) {
+            return -1;
+        }
+        
+}
+}
