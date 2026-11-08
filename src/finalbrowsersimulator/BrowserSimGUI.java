@@ -223,7 +223,41 @@ private void updateCurrentPage() {
         txtCurrentPage.setText(current);
     }
 }
+private void updateHistoryDisplay() {
+    if (visitedCount == 0) {
+        txtHistory.setText("");
+        return;
+    }
 
+    String current = navStack.peek();
+    int currentIndex = -1;
+
+    if (current != null) {
+        for (int i = visitedCount - 1; i >= 0; i--) {
+            if (visitedPages[i].equals(current)) {
+                currentIndex = i;
+                break;
+            }
+        }
+          }
+
+    StringBuilder history = new StringBuilder();
+
+    for (int i = 0; i < visitedCount; i++) {
+        history.append((i + 1));
+        history.append(". ");
+        history.append(visitedPages[i]);
+
+        if (i == currentIndex) {
+            history.append("  <-- Current");
+        }
+
+        history.append("\n");
+    }
+
+    txtHistory.setText(history.toString());
+}
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
