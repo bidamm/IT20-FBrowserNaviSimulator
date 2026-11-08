@@ -258,6 +258,35 @@ private void updateHistoryDisplay() {
     txtHistory.setText(history.toString());
 }
     
+private void searchVisitedPages(String keyword) {
+    if (keyword == null || keyword.trim().length() == 0) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Please enter a search keyword.",
+                "Empty Search",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int index = browserSearch.linearSearch(
+            visitedPages, visitedCount, keyword);
+
+    if (index == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Not Found",
+                "Search Result",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Found\nWebpage: " + visitedPages[index]
+                + "\nPosition: " + (index + 1),
+                "Search Result",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+    }
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
