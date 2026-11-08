@@ -105,7 +105,7 @@ Both members helped develop, test, and improve the project.
 
 Our project was developed together using GitHub. We used commits and pull requests to share our work and track our progress.
 
-Repository Link: [Paste your GitHub link here]
+Repository Link: https://bidamm.github.io/IT20-FBrowserNaviSimulator/
 
 12. Limitations
 The application only simulates browser navigation.
