@@ -9,15 +9,16 @@ package finalbrowsersimulator;
  * @author USER
  */
 public class BrowserHistoryStack {
+
     private String[] pages;
     private int top;
     private int capacity;
-    
+
     public BrowserHistoryStack(int capacity) {
 
         if (capacity <= 0) {
             throw new IllegalArgumentException(
-                "Capacity must be greater than zero."
+                    "Capacity must be greater than zero."
             );
         }
 
@@ -26,5 +27,17 @@ public class BrowserHistoryStack {
         this.top = -1;
     }
 
+    public boolean push(String url) {
+
+        if (url == null || url.trim().isEmpty() || isFull()) {
+            return false;
+        }
+
+        top++;
+        pages[top] = url.trim();
+
+        return true;
+    }
+    
 
 }
