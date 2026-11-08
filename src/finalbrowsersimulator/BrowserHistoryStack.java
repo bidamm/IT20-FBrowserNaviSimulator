@@ -51,5 +51,19 @@ public class BrowserHistoryStack {
 
         return url;
     }
+ public String peek() {
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        return pages[top];
+    }
+
+    // COMMIT 6: Check if stack is empty
+    public boolean isEmpty() {
+
+        return top == -1;
+    }
 
 }
