@@ -8,7 +8,15 @@ package finalbrowsersimulator;
  *
  * @author USER
  */
-public class BrowserSimGUI extends javax.swing.JFrame {
+  
+
+  public class BrowserSimGUI extends javax.swing.JFrame 
+    
+    private static final int MAX_PAGES = 100;
+    private BrowserHistoryStack navStack;
+    private BrowserSearch browserSearch;
+    private String[] visitedPages;
+    private int visitedCount;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -138,15 +146,15 @@ public class BrowserSimGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtURLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtURLActionPerformed
-      
+
     }//GEN-LAST:event_txtURLActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
