@@ -69,4 +69,18 @@ public class BrowserHistoryStack {
 
         return top == capacity - 1;
     }
+      public int size() {
+
+        return top + 1;
+    }
+
+    // Retrieve webpage using its index
+    public String getPageAt(int index) {
+
+        if (index < 0 || index > top) {
+            return null;
+        }
+
+        return pages[index];
+    }
 }
