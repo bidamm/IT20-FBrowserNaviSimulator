@@ -35,6 +35,41 @@ public class BrowserSearch {
         // Return -1 if no matching webpage exists
         return -1;
     }
+private boolean containsIgnoreCase(
+        String text,
+        String keyword
+    ) {
 
+        String haystack = text.toLowerCase();
+        String needle = keyword.toLowerCase();
+
+        int n = haystack.length();
+        int m = needle.length();
+
+        if (m == 0) {
+            return true;
+        }
+
+        if (m > n) {
+            return false;
+        }
+        for (int i = 0; i <= n - m; i++) {
+
+            int j = 0;
+
+            while (
+                j < m &&
+                haystack.charAt(i + j) == needle.charAt(j)
+            ) {
+                j++;
+            }
+
+            if (j == m) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
-}
+    
