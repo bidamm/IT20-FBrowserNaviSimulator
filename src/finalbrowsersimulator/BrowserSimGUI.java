@@ -190,6 +190,14 @@ private void visitPage() {
                 javax.swing.JOptionPane.WARNING_MESSAGE);
         return;
     }
+     navStack.push(url);
+    visitedPages[visitedCount] = url;
+    visitedCount++;
+
+    txtURL.setText("");
+    updateCurrentPage();
+    updateHistoryDisplay();
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
