@@ -197,7 +197,24 @@ private void visitPage() {
     txtURL.setText("");
     updateCurrentPage();
     updateHistoryDisplay();
+    
 }
+private void goBack() {
+    if (navStack.size() <= 1) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "No previous webpage to go back to.",
+                "Cannot Go Back",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    navStack.pop();
+
+    updateCurrentPage();
+    updateHistoryDisplay();
+}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
