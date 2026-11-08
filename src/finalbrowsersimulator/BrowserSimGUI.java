@@ -26,6 +26,8 @@ package finalbrowsersimulator;
 
     visitedPages = new String[MAX_PAGES];
     visitedCount = 0;
+    
+  
 }
 
 
@@ -168,7 +170,26 @@ package finalbrowsersimulator;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
     }//GEN-LAST:event_jButton2ActionPerformed
+private void visitPage() {
+    String url = txtURL.getText().trim();
 
+    if (url.length() == 0) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Please enter a URL.",
+                "Empty URL",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    if (navStack.isFull() || visitedCount >= MAX_PAGES) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Browsing history is full.",
+                "Stack Full",
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
