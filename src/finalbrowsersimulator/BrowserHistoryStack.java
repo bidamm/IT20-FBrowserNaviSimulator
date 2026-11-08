@@ -38,6 +38,18 @@ public class BrowserHistoryStack {
 
         return true;
     }
-    
+      public String pop() {
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        String url = pages[top];
+
+        pages[top] = null;
+        top--;
+
+        return url;
+    }
 
 }
