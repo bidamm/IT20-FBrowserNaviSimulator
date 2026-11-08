@@ -214,6 +214,16 @@ private void goBack() {
     updateCurrentPage();
     updateHistoryDisplay();
 }
+private void updateCurrentPage() {
+    String current = navStack.peek();
+
+    if (current == null) {
+        txtCurrentPage.setText("");
+    } else {
+        txtCurrentPage.setText(current);
+    }
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
