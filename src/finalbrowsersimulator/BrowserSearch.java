@@ -23,6 +23,18 @@ public class BrowserSearch {
         if (key.isEmpty()) {
             return -1;
         }
-        
+        for (int i = 0; i < history.size(); i++) {
+
+            String page = history.getPageAt(i);
+
+            if (page != null && containsIgnoreCase(page, key)) {
+                return i;
+            }
+        }
+
+        // Return -1 if no matching webpage exists
+        return -1;
+    }
+
 }
 }
