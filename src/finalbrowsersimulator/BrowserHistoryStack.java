@@ -83,4 +83,12 @@ public class BrowserHistoryStack {
 
         return pages[index];
     }
-}
+      }
+
+    // Get maximum stack capacity
+    public int getCapacity() {
+
+        return capacity;
+    }
+
+
