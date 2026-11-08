@@ -10,4 +10,7 @@ package finalbrowsersimulator;
  */
 public class BrowserSearch {
    
-}
+}  public int linearSearch(
+        BrowserHistoryStack history,
+        String keyword
+    ) {
