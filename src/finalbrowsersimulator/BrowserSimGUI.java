@@ -10,11 +10,11 @@ package finalbrowsersimulator;
  */
   
 
-    public class BrowserSimGUI extends javax.swing.JFrame 
+    public class BrowserSimGUI extends javax.swing.JFrame {
     
     
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BrowserSim21.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BrowserSimGUI.class.getName());
 
     private static final int MAX_PAGES = 100;
     private BrowserHistoryStack navStack;
@@ -26,7 +26,7 @@ package finalbrowsersimulator;
      * z
      * Creates new form BrowserSim2
      */
-    public BrowserSim21() {
+    public BrowserSimGUI() {
         initComponents();
         navStack = new BrowserHistoryStack(MAX_PAGES);
         browserSearch = new BrowserSearch();
@@ -179,7 +179,7 @@ package finalbrowsersimulator;
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         goBack();
     }//GEN-LAST:event_jButton2ActionPerformed
-    private void visitPage() {
+     private void visitPage() {
         String url = txtURL.getText().trim();
 
         if (url.length() == 0) {
@@ -319,7 +319,7 @@ package finalbrowsersimulator;
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new BrowserSim21().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new BrowserSimGUI().setVisible(true));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -4,9 +4,10 @@
  */
 package finalbrowsersimulator;
 
+
 /**
- *
- * @author USER
+ * Manually implemented array-based stack for browser navigation.
+ * Last webpage visited is always on top (LIFO: Last In, First Out).
  */
 public class BrowserHistoryStack {
 
@@ -15,80 +16,45 @@ public class BrowserHistoryStack {
     private int capacity;
 
     public BrowserHistoryStack(int capacity) {
-
-        if (capacity <= 0) {
-            throw new IllegalArgumentException(
-                    "Capacity must be greater than zero."
-            );
-        }
-
         this.capacity = capacity;
         this.pages = new String[capacity];
         this.top = -1;
     }
 
-    public boolean push(String url) {
-
-        if (url == null || url.trim().isEmpty() || isFull()) {
-            return false;
+    public void push(String url) {
+        if (isFull()) {
+            return;
         }
-
         top++;
-        pages[top] = url.trim();
-
-        return true;
+        pages[top] = url;
     }
-      public String pop() {
 
+    public String pop() {
         if (isEmpty()) {
             return null;
         }
-
         String url = pages[top];
-
         pages[top] = null;
         top--;
-
         return url;
     }
- public String peek() {
 
+    public String peek() {
         if (isEmpty()) {
             return null;
         }
-
         return pages[top];
     }
 
-    // COMMIT 6: Check if stack is empty
     public boolean isEmpty() {
-
         return top == -1;
     }
-  public boolean isFull() {
 
+    public boolean isFull() {
         return top == capacity - 1;
     }
-      public int size() {
 
+    public int size() {
         return top + 1;
     }
-
-    // Retrieve webpage using its index
-    public String getPageAt(int index) {
-
-        if (index < 0 || index > top) {
-            return null;
-        }
-
-        return pages[index];
-    }
-      }
-
-    // Get maximum stack capacity
-    public int getCapacity() {
-
-        return capacity;
-    }
-
-
+}
